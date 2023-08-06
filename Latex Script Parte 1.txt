@@ -1,0 +1,759 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{cancel}
+
+\title{
+    \vspace{-1cm}
+    \textbf{Lista 01} \\
+    Métodos Numéricos II \\
+}
+\author{
+    Oscar Mendez (20402) \\
+    Jeyner Arango (201106)
+}
+\date{}
+\begin{document}
+\maketitle
+
+\section{Parte}
+Para encontrar la descomposición espectral de la matrices necesitamos encontrar sus valores propios y vectores propios. La descomposición espectral de una matriz implica expresarla como un producto de sus vectores propios y valores propios. La fórmula para la descomposición espectral es: 
+
+$A = Q\Lambda Q^{-1}$
+dónde: \\
+- $A$ es la matriz que queremos descomponer, \\
+- $Q$ es una matriz que contiene los vectores propios de $A$ \\
+- $\Lambda$ es una matriz diagonal que contiene los eigenvalores de $A$\\
+- $Q^{-1}$ es la matriz inversa de $Q$ \\
+
+\subsection*{Pregunta 1A}
+
+\begin{equation*}
+A=
+%
+\begin{bmatrix}
+7 & 0 & 0 \\
+2 & 7 & 2 \\
+-2 & 0 & 5 
+\end{bmatrix}
+\end{equation*}
+
+\[ \text{det}(A - \lambda I) = 0 \]
+\[ \text{det}\left(
+\begin{bmatrix} 
+7 & 0 & 0 \\ 
+2 & 7 & 2 \\ 
+-2 & 0 & 5 
+\end{bmatrix} - \lambda 
+\begin{bmatrix} 
+1 & 0 & 0 \\ 
+0 & 1 & 0 \\ 
+0 & 0 & 1 
+\end{bmatrix}\right) =  
+\text{det}\left(
+\begin{bmatrix} 
+7 - \lambda & 0 & 0 \\ 
+2 & 7 - \lambda & 2 \\ 
+-2 & 0 & 5 - \lambda \end{bmatrix}\right) = 0 \]
+
+Calcular el determinante: \\
+\[ (7 - \lambda)((7 - \lambda)(5 - \lambda) - (0)(2)) - (2)((0)(5-\lambda)-(0)(0)) + (- 2)((0)(2)-(0)(7-\lambda)) = 0 \]
+\[ (7 - \lambda)(7 - \lambda)(5 - \lambda) - (0) + (0) = 0 \]
+\[ (7 - \lambda)^{2}(5 - \lambda) = 0 \]
+
+Ahora, resolvemos para los valores propios: \\
+$\lambda = 7$ (Multiplicidad 2) \\
+$\lambda = 5$ (Multiplicidad 1)
+
+Encontremos los vectores propios para \(\lambda = 7\):
+
+Para \(\lambda = 7\), tenemos:
+
+\[ (A - 7I) v = 0 \]
+
+Sustituyendo los valores:
+
+\[ \left(\begin{bmatrix} 7 & 0 & 0 \\ 2 & 7 & 2 \\ -2 & 0 & 5 \end{bmatrix} - 7 
+\begin{bmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix}\right) v = 0 \]
+\[ \begin{bmatrix} 0 & 0 & 0 \\ 2 & 0 & 2 \\ -2 & 0 & -2 \end{bmatrix} v = 0 \]
+
+Para resolver esto, realizamos la reducción de filas:
+
+\[ \begin{bmatrix} 0 & 0 & 0 \\ 2 & 0 & 2 \\ -2 & 0 & -2 \end{bmatrix} 
+\to
+\begin{array}{c}
+{r_1 \leftrightarrow r_3 }\\{(-1)r_1}/2\\{r_2-2r_1}
+\end{array}
+\to
+\begin{bmatrix} 1 & 0 & 1 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \end{bmatrix} \]
+
+La forma escalonada de filas reducida muestra que la primera fila es redundante (todo ceros). Entonces, el sistema de ecuaciones es:
+
+\[ x + z = 0 \]
+
+Elige un valor para \(z\)
+
+  (sea \(z = 1\)), entonces:
+
+\[ x + 1 = 0 \]
+\[ x = -1 \]
+
+Así, los vectores propios correspondiente a \(\lambda = 7\) es:
+
+\[ v_1 = \begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix} v_2 = \begin{bmatrix} -1 \\ 0 \\ 1 \end{bmatrix}  \]
+
+Encontremos los vectores propios para \(\lambda = 5\):
+
+Para \(\lambda = 5\), tenemos:
+
+\[ (A - 5I) v = 0 \]
+
+Sustituye los valores:
+
+\[ \left(\begin{bmatrix} 7 & 0 & 0 \\ 2 & 7 & 2 \\ -2 & 0 & 5 \end{bmatrix} - 5 
+\begin{bmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix}
+\right) v = 0 \]
+
+\[ \begin{bmatrix} 2 & 0 & 0 \\ 2 & 2 & 2 \\ -2 & 0 & 0 \end{bmatrix} v = 0 \]
+
+Para resolver esto, realizamos la reducción de filas:
+
+\[ \begin{bmatrix} 2 & 0 & 0 \\ 2 & 2 & 2 \\ -2 & 0 & 0 \end{bmatrix} 
+\to
+\begin{array}{c}
+\genfrac{}{}{0pt}{0}{r_1 / 2 }{r_2-2r_1}\\{r_3+2r_1}
+\end{array}
+\to
+\begin{bmatrix} 1 & 0 & 0 \\ 0 & 2 & 2 \\ 0 & 0 & 0 \end{bmatrix} \]
+
+La forma escalonada de filas reducida muestra que la tercera fila es redundante (todo ceros). Entonces, el sistema de ecuaciones es:
+
+\[ x = 0 \]
+\[ 2y + 2z = 0 \]
+Elija un valor para \(z\) (sea \(z = 1\)), luego:
+\[ 2y + 2(1) = 0 \]
+\[ 2y + 2 = 0 \]
+\[ 2y = -2 \]
+\[ y = -1 \]
+
+Así, el vector propio correspondiente a \(\lambda = 5\) es:
+
+\[ v_3 = \begin{bmatrix} 0 \\ -1 \\ 1 \end{bmatrix} \]
+
+Así la matriz $Q$ quedaría:
+$Q = \begin{bmatrix}
+    0 & -1 & 0 \\ 1 & 0 & -1 \\ 0 & 1 & 1
+\end{bmatrix}$ \\
+Y su inversa $Q^{-1}$ quedaría:
+$Q^{-1} = \begin{bmatrix}
+1 & 1 & 1 \\ -1 & 0 & 0 \\ 1 & 0 & 1    
+\end{bmatrix}$ 
+La descomposición espectral quedaría:
+$A = \begin{bmatrix}
+    0 & -1 & 0 \\ 1 & 0 & -1 \\ 0 & 1 & 1
+\end{bmatrix}
+\begin{bmatrix}
+7 & 0 & 0 \\ 0 & 7 & 0 \\ 0 & 0 & 5    
+\end{bmatrix}
+\begin{bmatrix}
+1 & 1 & 1 \\ -1 & 0 & 0 \\ 1 & 0 & 1    
+\end{bmatrix} = 
+\begin{bmatrix}
+7 & 0 & 0 \\ 2 & 7 & 2 \\ -2 & 0 & 5    
+\end{bmatrix}$
+
+\subsection*{Pregunta 1B}
+\begin{equation*}
+B=
+%
+\begin{bmatrix}
+-2 & 1 \\
+0 & 2  
+\end{bmatrix}
+\end{equation*} \\
+Por ser matriz triangular superior sus determinantes son la diagonal principal: \\
+$\lambda = 2$ y $\lambda = -2$
+
+Para \(\lambda = 2\), tenemos:
+
+\[ (A - 2I) v = 0 \]
+
+Sustituyendo los valores:
+
+\[ \left(\begin{bmatrix} -2 & 1 \\ 0 & 2  \end{bmatrix} - 2 
+\begin{bmatrix} 1 & 0  \\ 0 & 1 \end{bmatrix}\right) v = 0 \]
+\[ \begin{bmatrix} -4 & 1 \\ 0 & 0  \end{bmatrix} v = 0 \]
+
+No es necesario reducir más ya que la segunda fila es redundante (todo ceros). Entonces, el sistema de ecuaciones es:
+
+\[ -4x + y = 0 \]
+\[y = 4x \]
+Elige un valor para \(x\)
+(sea \(x = 1\)), entonces:
+\[ y  = 4 \]
+
+Así el vector propio correspondiente a \(\lambda = 2\) es:
+\[ v_1 = \begin{bmatrix} 1 \\ 4 \end{bmatrix} \]
+Para \(\lambda = -2\), tenemos:
+\[ \left(\begin{bmatrix} -2 & 1 \\ 0 & 2  \end{bmatrix} + 2 
+\begin{bmatrix} 1 & 0  \\ 0 & 1 \end{bmatrix}\right) v = 0 \]
+\[ \begin{bmatrix} 0 & 1 \\ 0 & 4 \end{bmatrix} v = 0 \]
+Como la segunda fila es combinación lineal de la primera al reducir queda:
+\[ \begin{bmatrix} 0 & 1 \\ 0 & 0 \end{bmatrix} v = 0 \]
+\[y = 0\] 
+\[x = 1\]
+Así el vector propio correspondiente a \(\lambda = -2\) es:
+\[ v_2 = \begin{bmatrix} 1 \\ 0 \end{bmatrix} \]
+Así la matriz $Q$ quedaría:
+$Q = \begin{bmatrix}
+    1 & 4 \\ 1 & 0 
+\end{bmatrix}$ \\
+Para calcular su inversa por el metodo de Gauss:
+\[\begin{bmatrix} 1 & 1 & 1 & 0 \\ 4 & 0 & 0 & 1 \end{bmatrix}
+\to \begin{array}{c} {r_1 \leftrightarrow r_2 } \end{array}
+\to \begin{bmatrix} 4 & 0 & 0 & 1 \\ 1 & 1 & 1 & 0 \end{bmatrix}
+\to \begin{array}{c} {r_1 / 4 } \end{array}
+\to \begin{bmatrix} 1 & 0 & 0 & 1/4 \\ 1 & 1 & 1 & 0 \end{bmatrix} 
+\to \begin{array}{c} {r_2 - r_1 } \end{array} \to \] 
+\[\begin{bmatrix} 1 & 0 & 0 & 1/4 \\ 0 & 1 & 1 & -1/4 \end{bmatrix} 
+\to Q^{-1} = \begin{bmatrix} 0 & 1/4 \\ 1 & -1/4 \end{bmatrix}
+\]
+La descomposición espectral quedaría:
+\[ B = \begin{bmatrix} 1 & 1 \\ 4 & 0 \end{bmatrix}
+\begin{bmatrix} 2 & 0 \\ 0 & -2  \end{bmatrix}
+\begin{bmatrix} 0 & 1/4 \\ 1 & -1/4 \end{bmatrix} = 
+\begin{bmatrix} -2 & 1 \\ 0 & 2 \end{bmatrix}\]
+
+
+\subsection*{Pregunta 1C}
+
+\[ C = \begin{bmatrix} 3 & 1 & 0 & 0 \\ 0 & 3 & 0 & 0 \\ 0 & 0 & 3 & 1 \\ 0 & 0 & 0 & 3\end{bmatrix} \]
+Por ser matriz triangular superior sus determinantes son la diagonal principal: 
+
+\begin{center}
+$\lambda = 3$ (Multiplicidad Algebráica 4)
+
+Para \(\lambda = 3\), tenemos:
+\[ (A - 3I) v = 0 \]
+Sustituyendo los valores:
+\[ \left(\begin{bmatrix} 3 & 1 & 0 & 0 \\ 0 & 3 & 0 & 0 \\ 0 & 0 & 3 & 1 \\ 0 & 0 & 0 & 3 \end{bmatrix} - 3 
+\begin{bmatrix} 1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 1\end{bmatrix}\right) v = 0 \]
+\[ \begin{bmatrix} 0 & 1 & 0 & 0 \\ 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 1 \\ 0 & 0 & 0 & 0  \end{bmatrix} v = 0 \]
+
+La forma escalonada de filas reducida muestra que la segunda y cuarta fila es redundante (todo ceros). Entonces, el sistema de ecuaciones es:
+
+\[ x = 0 \]
+\[ z = 0 \]
+Elija un valor para \(w\) (sea \(w = 1\)), y para \(y\) (sea \(y = 1\)) luego:
+
+\[ v_1 = \begin{bmatrix} 1 \\ 0 \\ 0 \\ 0 \end{bmatrix} , v_2 = \begin{bmatrix} 0 \\ 0 \\ 1 \\ 0 \end{bmatrix}\]
+
+Solo existen 2 vectores linealmente independientes por lo que la matriz NO es diagonalizable
+\end{center}
+
+\subsection*{Pregunta 2}
+
+\textbf{a) Mostrar que si A es una matriz de rango 1, de la forma $A = uv^{T}$ , entonces $||A||_2 = ||u||_2 ||v||_2$ } 
+
+Sea $A$ el producto de dos vectores, un vector $u$ de tamaño m y un vector $v$ de tamaño n. Una matriz de esta forma es de rango 1 porque todas sus filas o todas sus columnas son múltiplos escalares de un mismo vector (es decir el producto exterior de dos vectores). El producto de estos vectores es una matriz de m x n. Por ende su transpuesta $A^{T}$ es una matriz de n x m y se obtiene al intercambiar filas por columnas $A^{T} = (u\cdot v^{T})^{T} = v\cdot u^{T}$ 
+
+La norma dos matricial se calcula como $||A||_{2} = \sqrt{\lambda_{max}(A^{T}A)}$ lo que es igual a $\sqrt{\lambda_{max}((vu^{T})(uv^{T})}$ como $A^{T} = n\times m$ y $A = m\times n$ entonces $A^{T}\times A = n\times n$. Esto se puede reordenar los términos y separar como $\sqrt{u^{T}u} \sqrt{\lambda_{max}(vv^{T})}$ donde $vv^{T}$ es una matriz de rango 1 con su mayor valor propio $v^{T}v$ ya que todas las demas filas y o columnas son múltiplos de la original y su eigenvalor máximo sera la norma 2 del vector lo que es igual a $\sqrt{u^{T}u}\sqrt{v^{T}v}$ lo que es igual a la multiplicación de las normas 2 de dos vectores, es decir $||u||_2 ||v||_2$ \\
+
+\textbf{b) ¿Vale lo mismo para la norma de Frobenius? Muestre o de un contraejemplo.}
+
+Si. La norma de Frobenius puede expresarse en términos de sus entradas
+\[||A||_{F} = \sqrt{\Sigma_{j=1}^m\Sigma_{k=1}^{n}|A_{j,k}|^{2}}\]
+Sin embargo tambien se puede definir como $||A||_{F} = \sqrt{Tr(A^{T}A)}$ donde $Tr$ es la traza de la matriz, es decir la suma de la diagonal principal. Como la suma es conmutativa entonces la norma de Frobenius tambien es igual a $\sqrt{Tr(AA^{T})}$.
+Nótese que la norma 2 como la norma de Frobenius son unitariamente invariantes. Por lo tanto, por descomposición en valores singulares (SVD)
+\[||A||_{F} = \sqrt{Tr(AA^{T})} = \sqrt{Tr((U\Sigma V^{T})(U\Sigma V^{T})^{T})} = \sqrt{Tr(U\Sigma^{2}U^{T})} = \] 
+\[ \sqrt{Tr(\Sigma^{2})} = \sqrt{\Sigma{i=1}^{n}\sigma_{i}^{2}}\]
+De la misma forma podemos probar que:
+\[||A||_{F} = \sqrt{Tr(AA^{T})} = \sqrt{Tr(uv^{T}vu^{T})} = \sqrt{(u^{T}u)(v^{T}v)} = ||u||_2 ||v||_2 \]
+
+
+\subsection*{Pregunta 3A}
+
+Calcular (a mano) la descomposicion SVD de la siguiente matriz:
+\[ A = \begin{bmatrix}
+     1 & 1 \\ 0 & 1
+\end{bmatrix}
+\]
+Primero calculamos $AA^{T}$:
+\[ AA^{T} = 
+\begin{bmatrix} 1 & 1 \\ 0 & 1 \end{bmatrix}
+\begin{bmatrix} 1 & 0 \\ 1 & 1 \end{bmatrix} = 
+\begin{bmatrix} 2 & 1 \\ 1 & 1 \end{bmatrix}
+\]
+Calculamos sus valores propios de la matriz resultante:
+\[ \text{det}(A - \lambda I) = 0 \]
+\[ \text{det}\left(
+\begin{bmatrix} 2 & 1 \\ 1 & 1 \end{bmatrix} - \lambda 
+\begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}\right) =  
+\text{det}\left(
+\begin{bmatrix} 2 - \lambda &  1 \\ 1 & 1 - \lambda \end{bmatrix}\right) = 0 \]
+
+Calculamos los valores propios:
+\[ (2 - \lambda)(1 - \lambda) - (1)(1) = 0 \]
+\[2 - 2\lambda - \lambda + \lambda^{2} -1 = \lambda^{2} - 3\lambda + 1 = 0\]
+\[\lambda_{1}, \:\lambda_{2} = \frac{3 \pm \sqrt{(-3)^{2} - 4(1)(1)}}{(2)(1)} =
+\frac{3 \pm \sqrt{5}}{2} \]
+Sacamos la raiz a los valores propios, esto es:
+\[\sqrt{\frac{3 \pm \sqrt{5}}{2}} \to \text{racionalizamos} \to \frac{\sqrt{2}\sqrt{3 \pm \sqrt{5}}}{2}\]
+Construimos la matriz $\Sigma$:
+\[\Sigma = \begin{bmatrix}
+    \frac{\sqrt{2}\sqrt{3 + \sqrt{5}}}{2} & 0 \\ 0 & \frac{\sqrt{2}\sqrt{3 - \sqrt{5}}}{2}
+\end{bmatrix}\]
+Calcular los vectores propios de $AA^{T}$:\\
+Para \(\lambda_{1} = \frac{3 + \sqrt{5}}{2}\), tenemos:
+\[ (AA^{T} - (\frac{3 + \sqrt{5}}{2})I) v = 0 \]
+Sustituyendo los valores:
+\[ \left(\begin{bmatrix} 2 & 1 \\ 1 & 1 \end{bmatrix} - \frac{3 + \sqrt{5}}{2} 
+\begin{bmatrix} 
+    1 & 0 \\ 0 & 1 \end{bmatrix}\right) v =  
+\begin{bmatrix} 
+    \frac{1-\sqrt{5}}{2} & 1 \\ 1 & \frac{-1-\sqrt{5}}{2} 
+\end{bmatrix} \to  
+\begin{array}{c}
+    {r_{1} \leftrightarrow r_{2}} 
+\end{array} \to
+\begin{bmatrix} 
+    1 & \frac{-1-\sqrt{5}}{2} \\ \frac{1-\sqrt{5}}{2} & 1  
+\end{bmatrix}\]
+\[ \to 
+\begin{array}{c}
+    {r_{2} - (\frac{1-\sqrt{5}}{2}) r_{1}} 
+\end{array} \to
+\begin{bmatrix} 
+    1 &  \frac{-1-\sqrt{5}}{2} \\ 0 & 0 
+\end{bmatrix} \to 1x = (\frac{1+\sqrt{5}}{2})y \]
+Sea $y=1$ entonces:
+\[ v_1 = \begin{bmatrix} \frac{1+\sqrt{5}}{2} \\ 1 \end{bmatrix} \]
+Para normalizar el vector calculamos su longitud:
+\[\sqrt{(\frac{1+\sqrt{5}}{2})^{2}+ 1^{2}} = 
+\frac{1+2\sqrt{5}+5}{4} + \frac{4}{4} = \frac{10+2\sqrt{5}}{4} =
+\sqrt{\frac{5+\sqrt{5}}{2}} \]
+Dividimos cada componente por su longitud:
+\[a_{(1,1)} = \frac{\frac{1+\sqrt{5}}{2}}{\frac{\sqrt{5+\sqrt{5}}}{\sqrt{2}}} =
+\frac{\sqrt{2}(1+\sqrt{5})}{2\sqrt{5+\sqrt{5}}} \:
+a_{(2,1)} = \frac{1}{\sqrt{\frac{5+\sqrt{5}}{2}}} = 
+\frac{\sqrt{2}}{\sqrt{5+\sqrt{5}}} \]
+\[v_1 = \begin{bmatrix} 
+\frac{\sqrt{2}(1+\sqrt{5})}{2\sqrt{5+\sqrt{5}}} \\ 
+\frac{\sqrt{2}}{\sqrt{5+\sqrt{5}}}
+\end{bmatrix}\]
+Para \(\lambda_{2} = \frac{3 - \sqrt{5}}{2}\), tenemos:
+\[ (AA^{T} - (\frac{3 - \sqrt{5}}{2})I) v = 0 \]
+Sustituyendo los valores:
+\[ \left(\begin{bmatrix} 2 & 1 \\ 1 & 1 \end{bmatrix} - \frac{3 - \sqrt{5}}{2} 
+\begin{bmatrix} 
+    1 & 0 \\ 0 & 1 \end{bmatrix}\right) v =  
+\begin{bmatrix} 
+    \frac{1 + \sqrt{5}}{2} & 1 \\ 1 & \frac{-1 + \sqrt{5}}{2} 
+\end{bmatrix} \to  
+\begin{array}{c}
+    {r_{1} \leftrightarrow r_{2}} 
+\end{array} \to
+\begin{bmatrix} 
+    1 & \frac{\sqrt{5}-1}{2} \\ \frac{1+\sqrt{5}}{2} & 1  
+\end{bmatrix}\]
+\[ \to 
+\begin{array}{c}
+    {r_{2} - (\frac{1+\sqrt{5}}{2}) r_{1}} 
+\end{array} \to
+\begin{bmatrix} 
+    1 &  \frac{\sqrt{5}-1}{2} \\ 0 & 0 
+\end{bmatrix} \to 1x = (\frac{1-\sqrt{5}}{2})y \]
+Sea $y=1$ entonces:
+\[ v_2 = \begin{bmatrix} \frac{1-\sqrt{5}}{2} \\ 1 \end{bmatrix} \]
+Para normalizar el vector calculamos su longitud:
+\[\sqrt{(\frac{1-\sqrt{5}}{2})^{2}+ 1^{2}} = 
+\frac{1-2\sqrt{5}+5}{4} + \frac{4}{4} = \frac{10-2\sqrt{5}}{4} =
+\sqrt{\frac{5-\sqrt{5}}{2}} \]
+Dividimos cada componente por su longitud:
+\[b_{(1,1)} = \frac{\frac{1-\sqrt{5}}{2}}{\frac{\sqrt{5-\sqrt{5}}}{\sqrt{2}}} =
+\frac{\sqrt{2}(1-\sqrt{5})}{2\sqrt{5-\sqrt{5}}} \:
+b_{(2,1)} = \frac{1}{\sqrt{\frac{5-\sqrt{5}}{2}}} = 
+\frac{\sqrt{2}}{\sqrt{5-\sqrt{5}}} \]
+\[v_2 = \begin{bmatrix} 
+\frac{\sqrt{2}(1-\sqrt{5})}{2\sqrt{5-\sqrt{5}}} \\ 
+\frac{\sqrt{2}}{\sqrt{5-\sqrt{5}}}
+\end{bmatrix}\]
+Con los vectores normalizados construimos la matriz U:
+\[U =  \begin{bmatrix} \frac{\sqrt{2}(1+\sqrt{5})}{2\sqrt{5+\sqrt{5}}} & \frac{\sqrt{2}(1-\sqrt{5})}{2\sqrt{5-\sqrt{5}}}
+\\  
+\frac{\sqrt{2}}{\sqrt{5+\sqrt{5}}} &
+\frac{\sqrt{2}}{\sqrt{5-\sqrt{5}}}
+\end{bmatrix}
+\]
+Para determinar $V$ es necesario  multiplicar el recíproco de la raiz del eigenvalor por la matriz $A^{T}$ por el vector columna de $U$. Esto es: 
+\[v_i = \frac{1}{\sigma^{i}}
+\begin{bmatrix} 
+1 & 1 \\ 0 & 1 
+\end{bmatrix}^T u_i\]
+\[v_{1} = \frac{2}{\sqrt{2}\sqrt{3 + \sqrt{5}}} \cdot
+\begin{bmatrix}
+    1 & 0 \\ 1 & 1 
+\end{bmatrix}\cdot 
+\begin{bmatrix}
+ \frac{\sqrt{2}(1+\sqrt{5})}{2\sqrt{5+\sqrt{5}}} \\ \frac{\sqrt{2}}{\sqrt{5+\sqrt{5}}}    
+\end{bmatrix} =
+\begin{bmatrix}
+    \frac{2}{\sqrt{2}\sqrt{3 + \sqrt{5}}} & 0 \\ \frac{2}{\sqrt{2}\sqrt{3 + \sqrt{5}}} & \frac{2}{\sqrt{2}\sqrt{3 + \sqrt{5}}}
+\end{bmatrix} \cdot
+\begin{bmatrix}
+ \frac{\sqrt{2}(1+\sqrt{5})}{2\sqrt{5+\sqrt{5}}} \\ \frac{\sqrt{2}}{\sqrt{5+\sqrt{5}}}    
+\end{bmatrix}
+\]
+\[\begin{bmatrix}
+    \frac{\cancel{2}}{\cancel{\sqrt{2}}\sqrt{3 + \sqrt{5}}} \cdot \frac{\cancel{\sqrt{2}}(1+\sqrt{5})}{\cancel{2}\sqrt{5+\sqrt{5}}} + \cancel{(0) \cdot \frac{\sqrt{2}}{\sqrt{5+\sqrt{5}}}} \\
+    \frac{\cancel{2}}{\cancel{\sqrt{2}}\sqrt{3 + \sqrt{5}}} \cdot \frac{\cancel{\sqrt{2}}(1+\sqrt{5})}{\cancel{2}\sqrt{5+\sqrt{5}}} + \frac{2}{\cancel{\sqrt{2}}\sqrt{3 + \sqrt{5}}} \cdot \frac{\cancel{\sqrt{2}}}{\sqrt{5+\sqrt{5}}} 
+\end{bmatrix} =
+\begin{bmatrix}
+    \frac{1+\sqrt{5}}{\sqrt{(3 + \sqrt{5})(5+\sqrt{5})}} \\
+    \frac{2 + (1+\sqrt{5})}{\sqrt{(3 + \sqrt{5})(5+\sqrt{5})}}
+\end{bmatrix} = \]
+\[ \begin{bmatrix}
+    \frac{1+\sqrt{5}}{\sqrt{(15 + 3\sqrt{5} + 5\sqrt{5} + 5)}} \\
+    \frac{2 +1+\sqrt{5}}{\sqrt{\sqrt{(15 + 3\sqrt{5} + 5\sqrt{5} + 5)}}}
+\end{bmatrix} =
+\begin{bmatrix}
+    \frac{1+\sqrt{5}}{\sqrt{(20 + 8\sqrt{5})}} \\
+    \frac{2+1+\sqrt{5}}{\sqrt{(20 + 8\sqrt{5})}}
+\end{bmatrix} =
+\begin{bmatrix}
+    \frac{1+\sqrt{5}}{\sqrt{(2^{2})(5 + 2\sqrt{5})}} \\
+    \frac{3+\sqrt{5}}{\sqrt{(2^{2})(5 + 2\sqrt{5})}}
+\end{bmatrix} =
+\begin{bmatrix}
+    \frac{1+\sqrt{5}}{2\sqrt{5 + 2\sqrt{5}}} \\
+    \frac{3+\sqrt{5}}{2\sqrt{5 + 2\sqrt{5}}}
+\end{bmatrix}
+\]
+\[v_{2} = \frac{2}{\sqrt{2}\sqrt{3 - \sqrt{5}}} \cdot
+\begin{bmatrix}
+    1 & 0 \\ 1 & 1 
+\end{bmatrix}\cdot 
+\begin{bmatrix}
+ \frac{\sqrt{2}(1-\sqrt{5})}{2\sqrt{5-\sqrt{5}}} \\ \frac{\sqrt{2}}{\sqrt{5-\sqrt{5}}}    
+\end{bmatrix} =
+\begin{bmatrix}
+    \frac{2}{\sqrt{2}\sqrt{3 - \sqrt{5}}} & 0 \\ \frac{2}{\sqrt{2}\sqrt{3 - \sqrt{5}}} & \frac{2}{\sqrt{2}\sqrt{3 - \sqrt{5}}}
+\end{bmatrix} \cdot
+\begin{bmatrix}
+ \frac{\sqrt{2}(1-\sqrt{5})}{2\sqrt{5-\sqrt{5}}} \\ \frac{\sqrt{2}}{\sqrt{5-\sqrt{5}}}    
+\end{bmatrix}
+\]
+\[\begin{bmatrix}
+    \frac{\cancel{2}}{\cancel{\sqrt{2}}\sqrt{3 - \sqrt{5}}} \cdot \frac{\cancel{\sqrt{2}}(1-\sqrt{5})}{\cancel{2}\sqrt{5-\sqrt{5}}} + \cancel{(0) \cdot \frac{\sqrt{2}}{\sqrt{5-\sqrt{5}}}} \\
+    \frac{\cancel{2}}{\cancel{\sqrt{2}}\sqrt{3 - \sqrt{5}}} \cdot \frac{\cancel{\sqrt{2}}(1-\sqrt{5})}{\cancel{2}\sqrt{5-\sqrt{5}}} + \frac{2}{\cancel{\sqrt{2}}\sqrt{3 - \sqrt{5}}} \cdot \frac{\cancel{\sqrt{2}}}{\sqrt{5-\sqrt{5}}} 
+\end{bmatrix} =
+\begin{bmatrix}
+    \frac{1-\sqrt{5}}{\sqrt{(3 - \sqrt{5})(5-\sqrt{5})}} \\
+    \frac{2 + (1-\sqrt{5})}{\sqrt{(3 - \sqrt{5})(5-\sqrt{5})}}
+\end{bmatrix} = \]
+\[ \begin{bmatrix}
+    \frac{1-\sqrt{5}}{\sqrt{(15 - 3\sqrt{5} - 5\sqrt{5} + 5)}} \\
+    \frac{2 +1-\sqrt{5}}{\sqrt{\sqrt{(15 - 3\sqrt{5} - 5\sqrt{5} + 5)}}}
+\end{bmatrix} =
+\begin{bmatrix}
+    \frac{1-\sqrt{5}}{\sqrt{(20 - 8\sqrt{5})}} \\
+    \frac{2+1-\sqrt{5}}{\sqrt{(20 - 8\sqrt{5})}}
+\end{bmatrix} =
+\begin{bmatrix}
+    \frac{1-\sqrt{5}}{\sqrt{(2^{2})(5 - 2\sqrt{5})}} \\
+    \frac{3-\sqrt{5}}{\sqrt{(2^{2})(5 - 2\sqrt{5})}}
+\end{bmatrix} =
+\begin{bmatrix}
+    \frac{1-\sqrt{5}}{2\sqrt{5 - 2\sqrt{5}}} \\
+    \frac{3-\sqrt{5}}{2\sqrt{5 - 2\sqrt{5}}}
+\end{bmatrix}
+\]
+\[
+\text{Por lo tanto }V = \begin{bmatrix}
+\frac{1+\sqrt{5}}{2\sqrt{5 + 2\sqrt{5}}} & 
+\frac{1-\sqrt{5}}{2\sqrt{5 - 2\sqrt{5}}} \\
+\frac{3+\sqrt{5}}{2\sqrt{5 + 2\sqrt{5}}} &  
+\frac{3-\sqrt{5}}{2\sqrt{5 - 2\sqrt{5}}}
+\end{bmatrix} \: V^{T} = 
+\begin{bmatrix}
+\frac{1+\sqrt{5}}{2\sqrt{5 + 2\sqrt{5}}} & 
+\frac{3+\sqrt{5}}{2\sqrt{5 + 2\sqrt{5}}} \\
+\frac{1-\sqrt{5}}{2\sqrt{5 - 2\sqrt{5}}} &  
+\frac{3-\sqrt{5}}{2\sqrt{5 - 2\sqrt{5}}}
+\end{bmatrix}
+\]
+Finalmente la descomposición $A = U\Sigma V^{T}$ quedaría:
+\[A = \begin{bmatrix}
+    1 & 1 \\ 0 & 1
+\end{bmatrix} = \]
+\[
+\begin{bmatrix} 
+\frac{\sqrt{2}(1+\sqrt{5})}{2\sqrt{5+\sqrt{5}}} & 
+\frac{\sqrt{2}(1-\sqrt{5})}{2\sqrt{5-\sqrt{5}}} \\  
+\frac{\sqrt{2}}{\sqrt{5+\sqrt{5}}} &
+\frac{\sqrt{2}}{\sqrt{5-\sqrt{5}}}
+\end{bmatrix}
+\begin{bmatrix}
+\frac{\sqrt{2}\sqrt{3 + \sqrt{5}}}{2} & 0 \\ 
+0 & \frac{\sqrt{2}\sqrt{3 - \sqrt{5}}}{2}
+\end{bmatrix}
+\begin{bmatrix}
+\frac{1+\sqrt{5}}{2\sqrt{5 + 2\sqrt{5}}} & 
+\frac{3+\sqrt{5}}{2\sqrt{5 + 2\sqrt{5}}} \\
+\frac{1-\sqrt{5}}{2\sqrt{5 - 2\sqrt{5}}} &  
+\frac{3-\sqrt{5}}{2\sqrt{5 - 2\sqrt{5}}}
+\end{bmatrix}
+\]
+\subsection*{Pregunta 3B}
+Calcular (a mano) la descomposicion SVD de la siguiente matriz:
+\[ B = \begin{bmatrix}
+     -2 & 2 & 1 \\ 1 & 1 & 0
+\end{bmatrix}
+\]
+Por ser 2 x 3 comviene mejor calcular $B^{T}B$:
+\[ B^{T}B = 
+\begin{bmatrix} -2 & 1 \\ 2 & 1 \\ 1 & 0 \end{bmatrix}
+\begin{bmatrix} -2 & 2 & 1 \\ 1 & 1 & 0 \end{bmatrix}
+ = \]
+\[
+\begin{bmatrix} (-2)(-2) + (1)(1) & (-2)(2) + (1)(1) & (-2)(1) + \cancel{(1)(0)} \\(2)(-2) + (1)(1) & (2)(2) + (1)(1) & (2)(1) + \cancel{(1)(0)} \\ 
+(1)(-2) + \cancel{(0)(1)} & (1)(2) + \cancel{(0)(1)} & (1)(1) + \cancel{(0)(0)} 
+\end{bmatrix} =
+\begin{bmatrix}
+    4+1 & -4 + 1 & -2 \\ -4 + 1 & 4 + 1 & 2 \\ -2 & 2 & 1
+\end{bmatrix} \]
+\[ = \begin{bmatrix}
+    5 & -3 & -2 \\ -3 & 5 & 2 \\ -2 & 2 & 1
+\end{bmatrix}\]
+Calculamos sus valores propios de la matriz resultante:
+\[ \text{det}(B - \lambda I) = 0 \]
+\[ = \begin{bmatrix}
+    5 - \lambda & -3 & -2 \\ -3 & 5 - \lambda & 2 \\ -2 & 2 & 1 - \lambda
+\end{bmatrix} = \]
+\[(5-\lambda)((5-\lambda)(1-\lambda)-4)-(-3)((-3)(1-\lambda)+4) + (-2) ((-3)(2)-(5-\lambda)(-2)) = \]
+\[-\lambda^{3} + 11\lambda^{2}-18\lambda = (-\lambda)(\lambda-9)(\lambda-2)\]
+Calculamos los valores propios:
+\[ (9 - \lambda)(2-\lambda)(-\lambda) \to \lambda_{1} = 9 \: \text{, } \lambda_{2} = 2 \: \text{, } \lambda_{3} = 0\]
+Sacamos la raiz a los valores propios, esto es:
+\[\begin{bmatrix}
+    \sqrt{9} & 0 & 0 \\ 0 & \sqrt{2} & 0
+\end{bmatrix}\]
+Construimos la matriz $\Sigma$:
+\[\Sigma = \begin{bmatrix}
+    3 & 0 & 0 \\ 0 & \sqrt{2} & 0
+\end{bmatrix}\]
+Calcular los vectores propios de $B^{T}B$:\\
+Para \(\lambda_{1} = 9\), tenemos:
+\[ (B^{T}B - 9I) v = 0 \to
+( \begin{bmatrix} 5 & -3 & -2 \\ -3 & 5 & 2 \\ -2 & 2 & 1 \end{bmatrix} -
+\begin{bmatrix} 9 & 0 & 0\\ 0 & 9 & 0 \\ 0 & 0 & 9 \end{bmatrix})v =
+\begin{bmatrix} -4 & -3 & 2 \\ -3 & -4 & 2 \\ -2 & 2 & -8 \end{bmatrix} \]
+Sea $z=1$ entonces:
+\[ v_1 = \begin{bmatrix} -2 \\ 2 \\ 1 \end{bmatrix} \]
+Normalizando el vector:
+\[v_{1} = 
+\begin{bmatrix} -\frac{2}{3} \\ \frac{2}{3} \\ \frac{1}{3}\end{bmatrix} \]
+Para \(\lambda_{2} = \), tenemos:
+\[ (B^{T}B - 2I)v =
+( \begin{bmatrix} 5 & -3 & -2 \\ -3 & 5 & 2 \\ -2 & 2 & 1 \end{bmatrix} -
+\begin{bmatrix} 2 & 0 & 0\\ 0 & 2 & 0 \\ 0 & 0 & 2 \end{bmatrix})v =
+\begin{bmatrix} 3 & -3 & 2 \\ -3 & 3 & 2 \\ -2 & 2 & -2 \end{bmatrix} \]
+Sea $x = y \text{ sea } x=1$ entonces:
+\[ v_2 = \begin{bmatrix} 1 \\ 1 \\ 0 \end{bmatrix} \]
+Normalizando el vector :
+\[v_{2} = 
+\begin{bmatrix} \frac{\sqrt{2}}{2} \\ \frac{\sqrt{2}}{2} \\ 0 \end{bmatrix} \]
+Para \(\lambda_{0} = \), tenemos:
+\[ (B^{T}B - 0I)v =
+( \begin{bmatrix} 5 & -3 & -2 \\ -3 & 5 & 2 \\ -2 & 2 & 1 \end{bmatrix} -
+\begin{bmatrix} 0 & 0 & 0\\ 0 & 0 & 0 \\ 0 & 0 & 0 \end{bmatrix})v =
+\begin{bmatrix} 5 & -3 & 2 \\ -3 & 5 & 2 \\ -2 & 2 & 1 \end{bmatrix} \]
+Sea $x = -y \text{ sea } z=1$ entonces:
+\[ v_3 = \begin{bmatrix} \frac{1}{4} \\ -\frac{1}{4} \\ 1 \end{bmatrix} \]
+Normalizando el vector :
+\[v_{3} =  \begin{bmatrix} 
+\frac{\sqrt{2}}{6} \\ -\frac{\sqrt{2}}{6} \\  2\frac{\sqrt{2}}{3} \end{bmatrix} \]
+Con los vectores normalizados construimos la matriz V:
+\[ V =
+\begin{bmatrix}
+    -\frac{2}{3} & \frac{\sqrt{2}}{2} & \frac{\sqrt{2}}{6} \\ 
+\frac{2}{3} & \frac{\sqrt{2}}{2} & -\frac{\sqrt{2}}{6} \\ 
+\frac{1}{3} & 0 & 2\frac{\sqrt{2}}{3}
+\end{bmatrix} \: V^{T} =
+\begin{bmatrix}
+-\frac{2}{3} & \frac{2}{3} & \frac{1}{3} \\
+\frac{\sqrt{2}}{2} &  \frac{\sqrt{2}}{2}& 0 \\ 
+\frac{\sqrt{2}}{6} & -\frac{\sqrt{2}}{6} & 2\frac{\sqrt{2}}{3}
+\end{bmatrix}
+\]
+Para determinar $U$ es necesario  multiplicar el recíproco de la raiz del eigenvalor por la matriz $B$ por el vector columna de $V$. Esto es: 
+\[u_i = \frac{1}{\sigma^{i}}
+\begin{bmatrix}
+    -2 & 2 & 1 \\ 1 & 1 & 0
+\end{bmatrix} v_i\]
+\[ u_{1} = \frac{1}{3} \begin{bmatrix} -2 & 2 & 1 \\ 1 & 1 & 0 \end{bmatrix} \cdot \begin{bmatrix} -\frac{2}{3} \\ \frac{2}{3} \\ \frac{1}{3} \end{bmatrix} =
+\begin{bmatrix} 1 \\ 0 \end{bmatrix} \]
+\[ u_{2} = \frac{1}{\sqrt{2}} \begin{bmatrix} -2 & 2 & 1 \\ 1 & 1 & 0 \end{bmatrix} \cdot 
+\begin{bmatrix} \frac{\sqrt{2}}{2} \\ \frac{\sqrt{2}}{2} \\ 0 \end{bmatrix} =
+\begin{bmatrix} 0 \\ 1 \end{bmatrix} \]
+\[\text{Por lo tanto }U = 
+\begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} \]
+Finalmente la descomposición $B = U\Sigma V^{T}$ quedaría:
+\[B = \begin{bmatrix} 
+-2 & 2 & 1 \\ 1 & 1 & 0
+    \end{bmatrix} = \]
+\[
+\begin{bmatrix} 
+1 & 0 \\ 0 & 1
+\end{bmatrix}
+\begin{bmatrix}
+3 & 0 & 0 \\ 0 & \sqrt{2} & 0
+\end{bmatrix}
+\begin{bmatrix}
+-\frac{2}{3} & \frac{2}{3} & \frac{1}{3} \\
+\frac{\sqrt{2}}{2} &  \frac{\sqrt{2}}{2}& 0 \\ 
+\frac{\sqrt{2}}{6} & -\frac{\sqrt{2}}{6} & 2\frac{\sqrt{2}}{3}
+\end{bmatrix}
+\]
+
+\subsection*{Pregunta 3C}
+Calcular (a mano) la descomposicion SVD de la siguiente matriz:
+\[ C = \begin{bmatrix}
+     2 & 4 \\ 1 & 3 \\ 0 & 0 \\ 0 & 0
+\end{bmatrix}
+\]
+Primero calculamos $CC^{T}$:
+\[ CC^{T} = 
+\begin{bmatrix} 2 & 4 \\ 1 & 3 \\ 0 & 0 \\ 0 & 0 \end{bmatrix}
+\begin{bmatrix}  2 & 1 & 0 & 0 \\ 4 & 3 & 0 & 0 \end{bmatrix} =
+\begin{bmatrix}
+    20 & 14 & 0 & 0 \\ 14 & 10 & 0 & 0 \\ 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0
+\end{bmatrix} \]
+Calculamos sus valores propios de la matriz resultante:
+\[ \text{det}(C - \lambda I) = 0 \]
+\[\begin{bmatrix}
+    20 - \lambda & 14 & 0 & 0 \\ 14 & 10 -\lambda & 0 & 0 \\ 
+    0 & 0 & 0 - \lambda & 0 \\ 0 & 0 & 0 & 0 -\lambda
+\end{bmatrix} \]
+Calculamos el polinomio característico:
+\[x^{4}-30x^{3}+4x^{2} = x^{2}(x^{2}-30x+4) = \]
+\[\lambda_{1} = 15 - \sqrt{221} \: \lambda_{2} = 15 + \sqrt{221} \: \lambda_{3} = 0 \: \lambda_{4} = 0\]
+Sacamos la raiz a los determinantes, esto es:
+\[\lambda_{1} = \sqrt{15 - \sqrt{221}} \: \lambda_{2} = \sqrt{15 + \sqrt{221}}\]
+Construimos la matriz $\Sigma$:
+\[\begin{bmatrix}
+    \sqrt{15 - \sqrt{221}} & 0 \\ 0 & \sqrt{15 + \sqrt{221}} \\
+    0 & 0 \\ 0 & 0
+\end{bmatrix}\]
+Calcular los vectores propios de $CC^{T}$:\\
+Para \(\lambda_{1} = \sqrt{15 - \sqrt{221}}\), tenemos:
+\[ (CC^{T} - (\sqrt{15 - \sqrt{221}})I) v = 0 \]
+Sea $x=14$ entonces:
+\[ u_{1} = 
+\begin{bmatrix} 5 - \sqrt{221} \\ 14 \\ 0 \\ 0 \end{bmatrix}\]
+Para normalizar el vector calculamos su longitud:
+\[\sqrt{(5-\sqrt{221})^{2} + 14^{2}} = \sqrt{442-10\sqrt{221}}\]
+Dividimos cada componente por su longitud:
+\[u_{1} = \begin{bmatrix}
+    \frac{5-\sqrt{221}}{\sqrt{442-10\sqrt{221}}} \\ 
+    \frac{14}{\sqrt{442-10\sqrt{221}}} \\ 0 \\ 0
+\end{bmatrix}\]
+Para \(\lambda_{2} = \sqrt{15 + \sqrt{221}}\), tenemos:
+\[ (CC^{T} - (\sqrt{15 + \sqrt{221}})I) v = 0 \]
+Sea $x=14$ entonces:
+\[ u_{2} = \begin{bmatrix} 15 + \sqrt{221} \\ 14 \\ 0 \\ 0 \end{bmatrix} \]
+Para normalizar el vector calculamos su longitud:
+\[\sqrt{(5+\sqrt{221})^{2} + 14^{2}} = \sqrt{442+10\sqrt{221}}\]
+Dividimos cada componente por su longitud:
+\[u_{2} = \begin{bmatrix}
+    \frac{5+\sqrt{221}}{\sqrt{442+10\sqrt{221}}} \\ 
+    \frac{14}{\sqrt{442+10\sqrt{221}}} \\ 0 \\ 0
+\end{bmatrix}\]
+Para los últimos dos vectores tenemos:
+\[u_{3} = \begin{bmatrix} 0 \\ 0 \\ 1 \\ 0 \end{bmatrix} \:
+u_{4} = \begin{bmatrix} 0 \\ 0 \\ 0 \\ 1 \end{bmatrix} \]
+Con los vectores normalizados construimos la matriz U:
+\[U =  \begin{bmatrix} 
+\frac{5-\sqrt{221}}{\sqrt{442-10\sqrt{221}}} & \frac{5+\sqrt{221}}{\sqrt{442+10\sqrt{221}}} & 0 & 0 \\
+\frac{14}{\sqrt{442-10\sqrt{221}}} & \frac{14}{\sqrt{442+10\sqrt{221}}} & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 1 
+\end{bmatrix} \]
+
+Para determinar $V$ es necesario  multiplicar el recíproco de la raiz del eigenvalor por la matriz $C^{T}$ por el vector columna de $U$. Esto es: 
+\[v_i = \frac{1}{\sigma^{i}} \]
+\[v_{1} =  \frac{1}{\sqrt{15 - \sqrt{221}}} \cdot 
+\begin{bmatrix}  2 & 1 & 0 & 0 \\ 4 & 3 & 0 & 0 \end{bmatrix} \cdot
+\begin{bmatrix}
+    \frac{5-\sqrt{221}}{\sqrt{442-10\sqrt{221}}} \\ 
+    \frac{14}{\sqrt{442-10\sqrt{221}}} \\ 0 \\ 0
+\end{bmatrix} = \]
+\[\begin{bmatrix}
+\frac{2}{\sqrt{15 - \sqrt{221}}} &  \frac{1}{\sqrt{15 - \sqrt{221}}} & 0 & 0 \\ \frac{4}{\sqrt{15 - \sqrt{221}}} &  \frac{3}{\sqrt{15 - \sqrt{221}}} & 0 & 0
+\end{bmatrix}\cdot
+\begin{bmatrix}
+    \frac{5-\sqrt{221}}{\sqrt{442-10\sqrt{221}}} \\ 
+    \frac{14}{\sqrt{442-10\sqrt{221}}} \\ 0 \\ 0
+\end{bmatrix} =
+\begin{bmatrix}
+    \frac{12\sqrt{2} - \sqrt{442}}{2\sqrt{1105 - 74\sqrt{221}}} \\
+    \frac{\sqrt{2}(\frac{31}{2}-\sqrt{221})}{\sqrt{1105-74\sqrt{221}}} &
+\end{bmatrix} \]
+\[ \text{Por lo tanto }V = \begin{bmatrix}
+    \frac{12\sqrt{2} - \sqrt{442}}{2\sqrt{1105 - 74\sqrt{221}}} &
+    \frac{12\sqrt{2} + \sqrt{442}}{2\sqrt{1105 + 74\sqrt{221}}} \\
+    \frac{\sqrt{2}(\frac{31}{2}-\sqrt{221})}{\sqrt{1105-74\sqrt{221}}} &
+    \frac{\sqrt{2}(\frac{31}{2}+\sqrt{221})}{\sqrt{1105+74\sqrt{221}}} &
+\end{bmatrix} \: V^{T} =
+\begin{bmatrix}
+    \frac{12\sqrt{2} - \sqrt{442}}{2\sqrt{1105 - 74\sqrt{221}}} &
+    \frac{\sqrt{2}(\frac{31}{2}-\sqrt{221})}{\sqrt{1105-74\sqrt{221}}} \\
+    \frac{12\sqrt{2} + \sqrt{442}}{2\sqrt{1105 + 74\sqrt{221}}} &
+    \frac{\sqrt{2}(\frac{31}{2}+\sqrt{221})}{\sqrt{1105+74\sqrt{221}}}
+\end{bmatrix} \]
+Finalmente la descomposición $C = U\Sigma V^{T}$ quedaría:
+\[C = \begin{bmatrix}
+2 & 4 \\ 1 & 3 \\ 0 & 0 \\ 0 & 0
+    \end{bmatrix} = \]
+\[
+\begin{bmatrix}
+\frac{5-\sqrt{221}}{\sqrt{442-10\sqrt{221}}} & \frac{5+\sqrt{221}}{\sqrt{442+10\sqrt{221}}} & 0 & 0 \\
+\frac{14}{\sqrt{442-10\sqrt{221}}} & \frac{14}{\sqrt{442+10\sqrt{221}}} & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 1 
+\end{bmatrix}
+\begin{bmatrix}
+ \sqrt{15 - \sqrt{221}} & 0 \\ 0 & \sqrt{15 + \sqrt{221}} \\
+    0 & 0 \\ 0 & 0
+\end{bmatrix}
+\begin{bmatrix}
+ \frac{12\sqrt{2} - \sqrt{442}}{2\sqrt{1105 - 74\sqrt{221}}} &
+    \frac{\sqrt{2}(\frac{31}{2}-\sqrt{221})}{\sqrt{1105-74\sqrt{221}}} \\
+    \frac{12\sqrt{2} + \sqrt{442}}{2\sqrt{1105 + 74\sqrt{221}}} &
+    \frac{\sqrt{2}(\frac{31}{2}+\sqrt{221})}{\sqrt{1105+74\sqrt{221}}}
+\end{bmatrix}
+\]
+\subsection*{Pregunta 4a}
+Utilice la descomposición SVD de la matriz B en el ejercicio anterior, para calcular los siguientes: \\
+a) $rank(B)$ \\
+El rango de $B$ son todos los valores propios que no son cero, es decir 2 \\
+b) $Ker(B)$ \\
+El kernel de $B$ son los valores que mapean a 0, es decir 1 \\
+c) $Im(B)$ \\
+La imagen de $B$ es el espacio generado por los vectores columnas de la matriz que es el conjunto de todas las combinaciones lineales de sus columnas. Es decir, es el espacio generado por las columnas de la matriz. 
+
+Para calcular la imagen de la matriz \(\begin{bmatrix}-2 & 2 & 1\\1 & 1 & 0\end{bmatrix}\), \\
+primero necesitamos encontrar las columnas linealmente independientes de la matriz. Luego, generamos todas las combinaciones lineales posibles de esas columnas.
+Se observa que las dos columnas de la matriz original son linealmente independientes (ninguna es un múltiplo escalar de la otra). Por lo tanto, la imagen de la matriz estará contenida en un espacio de dos dimensiones.
+
+Las columnas de la matriz son:
+\[
+\mathbf{B_1} = \begin{bmatrix}-2\\1\end{bmatrix} 
+\mathbf{B_2} = \begin{bmatrix}2\\1\end{bmatrix}
+\]
+Y la imagen de la matriz estará formada por todas las combinaciones lineales de estas.
+La imagen se puede expresar como:
+\[\text{Im(B)} = \left(\begin{bmatrix}-2\\1\end{bmatrix}, \begin{bmatrix}2\\1\end{bmatrix}\right)\]
+Para obtener la imagen de la matriz, simplemente combinamos linealmente los vectores utilizando todos los posibles valores de los coeficientes. Es un subespacio en $R^{2}$. \\
+d) $||B||_2$ y $||B||_F$ \\
+La Norma 2 se calcula como: \\
+\[||B||_{2} = \sqrt{\lambda_{max}(B^{T}B)} = \sqrt{\lambda_{max}(9,2)} = 3\]
+La Norma de Frobenius se calcula como:
+\[\sqrt{tr(B^{T}B)} = \sqrt{5 + 5 + 1} = \sqrt{11} \approx 3.317\]
+
+\end{document}
